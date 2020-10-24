@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-notif-danger',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notif-danger.component.css']
 })
 export class NotifDangerComponent implements OnInit {
-
+  @Input('msg') msg;
   constructor() { }
 
   ngOnInit(): void {

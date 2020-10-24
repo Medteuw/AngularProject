@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserServiceService } from '../Services/user-service.service';
+import { HttpClient ,HttpHeaders} from '@angular/common/http';
+
 
 @Component({
   selector: 'app-auth',
@@ -7,12 +10,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
-  constructor(private route: Router) {}
+  error;
+  apiUrl = '192.168.43.219/AngularAPI/public/api/';
+  //apiUrl = 'http://localhost:8000/api';
+  options: any;
+  constructor(private route: Router,  private http: HttpClient,private userservice:UserServiceService) {
+   
+      this.options = {
+        headers: new HttpHeaders({
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        })
+      };
+    }
+  
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   logIn(login, mdp) {
-    this.route.navigateByUrl('home');
+   
     console.log(login, mdp);
+    console.log(this.http.get(this.apiUrl,this.options));
+    if(this.userservice.getinfon(login,mdp)){
+      console.log(this.userservice.getinfon(login,mdp));
+      this.route.navigate(['/home']);
+    
+  }else{
+    this.error="Login mot de passe incorrect"
   }
-}
+}}

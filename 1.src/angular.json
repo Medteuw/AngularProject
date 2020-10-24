@@ -122,5 +122,8 @@
       }
     }
   },
-  "defaultProject": "tp1"
+  "defaultProject": "tp1",
+  "cli": {
+    "analytics": false
+  }
 }
